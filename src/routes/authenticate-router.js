@@ -13,5 +13,7 @@ export const router = express.Router()
 const authenticateController = new AuthenticateController()
 
 router.get('/', authenticateController.info)
+router.post('/login', authenticateController.login)
+router.post('/register', authenticateController.register)
 
 router.use('*', (req, res, next) => next(createError(404)))
