@@ -32,6 +32,14 @@ async function startServer () {
 
   // Request errors
   app.use((err, req, res, next) => {
+    if (err.status === 401) {
+      return res.status(401).json({ message: 'Invalid Credentials', status: '401' })
+    }
+
+    if (err.status === 403) {
+      return res.status(403).json({ message: 'Forbidden', status: '403' })
+    }
+
     if (err.status === 404) {
       return res.status(404).json({ message: 'Not Found', status: '404' })
     }

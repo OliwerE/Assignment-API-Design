@@ -12,7 +12,7 @@ import jwt from 'jsonwebtoken'
 import { User } from '../models/user-model.js'
 
 /**
- * Class represents the authorization controller.
+ * Class represents the authenticate controller.
  */
 export class AuthenticateController {
   /**

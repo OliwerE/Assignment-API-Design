@@ -119,3 +119,4 @@ dist
 
 # jwt key
 private.pem
+public.pub
