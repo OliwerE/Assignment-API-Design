@@ -14,6 +14,6 @@ const authenticateController = new AuthenticateController()
 
 router.get('/', authenticateController.info)
 router.post('/login', authenticateController.login)
-router.post('/register', authenticateController.register)
+router.post('/register', (req, res, next) => authenticateController.register(req, res, next))
 
 router.use('*', (req, res, next) => next(createError(404)))

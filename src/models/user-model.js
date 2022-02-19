@@ -10,7 +10,7 @@ import mongoose from 'mongoose'
 const schema = new mongoose.Schema({
   username: {
     type: String,
-    minLength: 10,
+    minLength: 1,
     maxLength: 1000,
     required: true,
     unique: true,
