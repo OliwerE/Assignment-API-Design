@@ -11,7 +11,7 @@ import { router as authenticateRouter } from './authenticate-router.js'
 
 export const router = express.Router()
 
-router.get('/', (req, res, next) => { res.json({ msg: 'Hello World!' }) })
+router.get('/', (req, res, next) => { res.json({ message: 'Hello World!' }) })
 router.use('/authenticate', authenticateRouter)
 
 router.use('*', (req, res, next) => next(createError(404)))
