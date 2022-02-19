@@ -6,6 +6,7 @@
  */
 
 import createError from 'http-errors'
+import bcrypt from 'bcrypt'
 import { User } from '../models/user-model.js'
 
 /**
@@ -59,22 +60,31 @@ export class AuthenticateController {
    * @param {object} next - Next function.
    * @returns {object} - Response object.
    */
-  register (req, res, next) {
-    console.log(this.#isBodyValid(req.body))
-    if (!this.#isBodyValid(req.body)) {
-      return res.status(400).json({
-        msg: 'Invalid username and / or password! Username must have a length between 1-1000 and password 10-1000.'
-      })
+  async register (req, res, next) {
+    try {
+      if (!this.#isBodyValid(req.body)) {
+        return res.status(400).json({
+          msg: 'Invalid username and / or password! Username must have a length between 1-1000 and password 10-1000.'
+        })
+      }
+
+      const { username, password } = req.body
+      const numOfUsernameInDB = await User.find({ username })
+
+      if (numOfUsernameInDB.length === 0) {
+        const newUser = new User({
+          username,
+          password: await bcrypt.hash(password, 8)
+        })
+        newUser.save()
+        res.status(201).json({ msg: 'User has been created!' })
+      } else if (numOfUsernameInDB.length > 0) {
+        res.status(409).json({ msg: 'Username does already exist! Please choose another or login.' })
+      } else {
+        next(createError(500))
+      }
+    } catch (err) {
+      next(createError(500))
     }
-    const { username, password } = req.body
-
-    // Check if username/password are entered
-
-    // check if exist
-
-
-    // create if not exist
-
-    res.json({ msg: 'register' })
   }
 }
