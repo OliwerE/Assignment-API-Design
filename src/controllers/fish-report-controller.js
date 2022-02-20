@@ -13,23 +13,6 @@ import { FishReport } from '../models/fish-report-model.js'
  */
 export class FishReportController {
   /**
-   * Information about courses.
-   *
-   * @param {object} req - Request object.
-   * @param {object} res - Response object.
-   * @param {object} next - Next function.
-   */
-  /*
-  info (req, res, next) {
-    try {
-      res.json({ message: 'some text...' })
-    } catch (err) {
-      next(createError(500))
-    }
-  }
-  */
-
-  /**
    * Returns all fish reports.
    *
    * @param {object} req - Request object.
@@ -137,6 +120,51 @@ export class FishReportController {
       return false
     }
     return true
+  }
+
+  /**
+   * Updates fish report.
+   *
+   * @param {object} req - Request object.
+   * @param {object} res - Response object.
+   * @param {object} next - Next function.
+   */
+  async updateFishReport (req, res, next) {
+    try {
+      const reportID = req.params.id
+      const report = await FishReport.findOne({ _id: reportID }).catch(() => {
+        next(createError(404))
+      })
+
+      if (report === null) {
+        next(createError(404))
+      } else if (report.fisherman === req.user.username) {
+        if (!this.#isCompleteReport(res, req.body)) return
+        const { position, lakeRiverName, city, fishSpecie, weight, length, imageURL } = req.body
+
+        await FishReport.updateOne({ _id: reportID }, { position, lakeRiverName, city, fishSpecie, weight, length, imageURL }, (error, response) => {
+          if (error) {
+            next(createError(500))
+          }
+
+          if (response) {
+            if (response.n === 0) { // not updated
+              next(createError(500))
+            } else if (response.n === 1) {
+              res.status(200).json({ message: 'Listing has been updated' }) // add link to resource!!!
+            } else {
+              next(createError(500))
+            }
+          }
+        })
+      } else if (report.fisherman !== req.user.username) {
+        next(createError(401))
+      } else {
+        next(createError(500))
+      }
+    } catch (err) {
+      next(createError(50))
+    }
   }
 
   /**
