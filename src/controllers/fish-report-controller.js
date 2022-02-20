@@ -10,7 +10,7 @@ import createError from 'http-errors'
 /**
  * Class represents the course controller.
  */
-export class FishController {
+export class FishReportController {
   /**
    * Information about courses.
    *

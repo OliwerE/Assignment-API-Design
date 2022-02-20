@@ -9,10 +9,10 @@ import express from 'express'
 import createError from 'http-errors'
 import { readFileSync } from 'fs'
 import jwt from 'jsonwebtoken'
-import { FishController } from '../controllers/fish-controller.js'
+import { FishReportController } from '../controllers/fish-report-controller.js'
 
 export const router = express.Router()
-const fishController = new FishController()
+const fishController = new FishReportController()
 
 /**
  * Authorizes user.
@@ -25,12 +25,13 @@ const fishController = new FishController()
 const authorizeUser = (req, res, next) => {
   try {
     const jwtToken = req.headers.authorization
+
     if (jwtToken === undefined) return next(createError(401))
+
     const privateKey = readFileSync('public.pub', 'utf-8')
     const payload = jwt.verify(jwtToken, privateKey)
-    console.log(payload)
 
-    req.user = { // Adds user to request object
+    req.user = {
       username: payload.username,
       userId: payload.userId,
       permissionLevel: payload.x_permission_level
