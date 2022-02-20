@@ -38,14 +38,16 @@ const authorizeUser = (req, res, next) => {
     }
     return next()
   } catch (err) {
-    next(createError(403))
+    next(createError(401))
   }
 }
 
 // router.get('/', fishController.info)
 // router.get('/test-private', authorizeUser, fishController.testProtected)
 
-router.get('/', fishController.getFishReports)
+router.get('/', fishController.getFishReports) // todo: different categories/speciets etc.
 router.post('/', authorizeUser, (req, res, next) => fishController.createFishReport(req, res, next))
+// router.put('/', authorizeUser, (req, res, next) => fishController.updateFishReport(req, res, next))
+router.delete('/:id', authorizeUser, (req, res, next) => fishController.deleteFishReport(req, res, next))
 
 router.use('*', (req, res, next) => next(createError(404)))

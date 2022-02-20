@@ -33,7 +33,7 @@ async function startServer () {
   // Request errors
   app.use((err, req, res, next) => {
     if (err.status === 401) {
-      return res.status(401).json({ message: 'Invalid Credentials', status: '401' })
+      return res.status(401).json({ message: 'Unauthorized', status: '401' })
     }
 
     if (err.status === 403) {

@@ -138,4 +138,33 @@ export class FishReportController {
     }
     return true
   }
+
+  /**
+   * Removes a fish report.
+   *
+   * @param {object} req - Request object.
+   * @param {object} res - Response object.
+   * @param {object} next - Next function.
+   */
+  async deleteFishReport (req, res, next) {
+    try {
+      const reportID = req.params.id
+      const report = await FishReport.findOne({ _id: reportID }).catch(() => {
+        next(createError(404))
+      })
+
+      if (report === null) {
+        next(createError(404))
+      } else if (report.fisherman === req.user.username) {
+        await FishReport.deleteOne({ _id: reportID })
+        res.status(200).json({ message: 'Report has been removed!' })
+      } else if (report.fisherman !== req.user.username) {
+        next(createError(401))
+      } else {
+        next(createError(500))
+      }
+    } catch (err) {
+      next(createError(500))
+    }
+  }
 }
