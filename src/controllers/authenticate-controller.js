@@ -119,7 +119,7 @@ export class AuthenticateController {
           username,
           password: await bcrypt.hash(password, 8)
         })
-        newUser.save()
+        await newUser.save()
         res.status(201).json({ message: 'User has been created!' })
       } else if (numOfUsernameInDB.length > 0) {
         res.status(409).json({ message: 'Username does already exist! Please choose another or login.' })

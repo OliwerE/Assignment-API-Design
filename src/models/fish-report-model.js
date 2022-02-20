@@ -36,17 +36,17 @@ const schema = new mongoose.Schema({
     maxLength: 1000,
     required: true
   },
-  weigth: {
+  weight: {
     type: String,
     maxLength: 1000,
     required: true
   },
-  Length: {
+  length: {
     type: String,
     maxLength: 1000,
     required: true
   },
-  ImageURL: {
+  imageURL: {
     type: String,
     maxLength: 1000,
     required: true

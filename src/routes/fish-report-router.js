@@ -42,7 +42,8 @@ const authorizeUser = (req, res, next) => {
   }
 }
 
-router.get('/', fishController.info)
-router.get('/test-private', authorizeUser, fishController.testProtected)
+// router.get('/', fishController.info)
+// router.get('/test-private', authorizeUser, fishController.testProtected)
+router.post('/', authorizeUser, (req, res, next) => fishController.createFishReport(req, res, next))
 
 router.use('*', (req, res, next) => next(createError(404)))
