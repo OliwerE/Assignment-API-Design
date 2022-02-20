@@ -30,6 +30,50 @@ export class FishReportController {
   */
 
   /**
+   * Returns all fish reports.
+   *
+   * @param {object} req - Request object.
+   * @param {object} res - Response object.
+   * @param {object} next - Next function.
+   */
+  async getFishReports (req, res, next) {
+    try {
+      const numOfReports = 10
+      const page = parseInt(req.query.page || 1)
+
+      if (page <= 0) {
+        next(createError(404))
+      }
+
+      // todo: different categories/speciets etc.
+
+      const reports = (await FishReport.find({}).sort({ createdAt: -1 }).limit(numOfReports).skip(numOfReports * (page - 1))).map(R => ({
+        id: R._id,
+        fisherman: R.fisherman,
+        position: R.position,
+        lakeRiverName: R.lakeRiverName,
+        city: R.city,
+        fishSpecie: R.fishSpecie,
+        weight: R.weight,
+        length: R.length,
+        imageURL: R.imageURL,
+        createdAt: R.createdAt,
+        updatedAt: R.updatedAt
+      }))
+
+      if (reports.length <= 0) {
+        next(createError(404))
+      } else {
+        const numOfPages = Math.ceil((await FishReport.countDocuments({})) / numOfReports)
+        res.json({ message: 'fish reports!!!', page, numOfPages, reports })
+      }
+    } catch (err) {
+      console.log(err)
+      next(createError(500))
+    }
+  }
+
+  /**
    * Creates a fish report.
    *
    * @param {object} req - Request object.
