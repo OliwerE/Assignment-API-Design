@@ -28,9 +28,23 @@ export class FishReportController {
         next(createError(404))
       }
 
-      // todo: different categories/speciets etc.
+      const query = {}
 
-      const reports = (await FishReport.find({}).sort({ createdAt: -1 }).limit(numOfReports).skip(numOfReports * (page - 1))).map(R => ({
+      if (req.params.category === 'fisherman') {
+        query.fisherman = req.params.categoryValue
+      } else if (req.params.category === 'lake' || req.params.category === 'river') {
+        query.lakeRiverName = req.params.categoryValue
+      } else if (req.params.category === 'city') {
+        query.city = req.params.categoryValue
+      } else if (req.params.category === 'specie') {
+        query.fishSpecie = req.params.categoryValue
+      } else if (req.params.category === 'weight') {
+        query.weight = req.params.categoryValue
+      } else if (req.params.category === 'length') {
+        query.length = req.params.categoryValue
+      }
+
+      const reports = (await FishReport.find(query).sort({ createdAt: -1 }).limit(numOfReports).skip(numOfReports * (page - 1))).map(R => ({
         id: R._id,
         fisherman: R.fisherman,
         position: R.position,
