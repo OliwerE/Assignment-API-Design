@@ -13,7 +13,7 @@ import { Webhook } from '../models/webhook-model.js'
  */
 export class WebhookController {
   /**
-   * Information about available webhooks.
+   * Returns a users own webhooks.
    *
    * @param {object} req - Request object.
    * @param {object} res - Response object.
@@ -23,7 +23,6 @@ export class WebhookController {
     try {
       const numOfHooks = 10
       const page = parseInt(req.query.page || 1)
-
       const query = { user: req.user.username }
 
       const ownWebhooks = (await Webhook.find(query).sort({ createdAt: -1 }).limit(numOfHooks).skip(numOfHooks * (page - 1))).map(R => ({
