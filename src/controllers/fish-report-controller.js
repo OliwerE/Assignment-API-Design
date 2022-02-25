@@ -13,7 +13,7 @@ import { WebhookController } from '../controllers/webhook-controller.js'
  * Class represents the course controller.
  */
 export class FishReportController {
-  webhookControler = new WebhookController()
+  #webhookControler = new WebhookController()
 
   /**
    * Returns all fish reports.
@@ -105,7 +105,7 @@ export class FishReportController {
       const report = await FishReport.findOne(reportData).catch(() => {
         next(createError(404))
       })
-      this.webhookControler.sendWebhookEvent('new-report', report)
+      this.#webhookControler.sendWebhookEvent('new-report', report)
     } catch (err) {
       next(createError(500))
     }
