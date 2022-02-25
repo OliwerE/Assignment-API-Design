@@ -1,5 +1,5 @@
 /**
- * Module represents auth controller.
+ * Module represents authentication controller.
  *
  * @author Oliwer Ellréus <oe222ez@student.lnu.se>
  * @version 1.0.0
@@ -16,7 +16,7 @@ import { User } from '../models/user-model.js'
  */
 export class AuthenticateController {
   /**
-   * Explains how to authenticate.
+   * Returns how to authenticate.
    *
    * @param {object} req - Request object.
    * @param {object} res - Response object.

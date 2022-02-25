@@ -98,8 +98,6 @@ async function startServer () {
     if (err.status === 500) {
       return res.status(500).json({ message: 'Internal Server Error', links: hateoasLinks })
     }
-
-    // ToDo: Add all errors here!
   })
 
   // Start Express

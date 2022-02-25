@@ -280,7 +280,7 @@ export class WebhookController {
       token: R.token
     }))
 
-    // Send fish report to webhooks
+    // Send fish report to registered webhooks
     registeredWebhooks.forEach((hook) => {
       fetch(hook.hookURL, {
         method: 'POST',

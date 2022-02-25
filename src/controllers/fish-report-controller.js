@@ -1,5 +1,5 @@
 /**
- * Module represents the course controller.
+ * Module represents the fish report controller.
  *
  * @author Oliwer Ellréus <oe222ez@student.lnu.se>
  * @version 1.0.0
@@ -10,7 +10,7 @@ import { FishReport } from '../models/fish-report-model.js'
 import { WebhookController } from '../controllers/webhook-controller.js'
 
 /**
- * Class represents the course controller.
+ * Class represents the fish report controller.
  */
 export class FishReportController {
   #webhookControler = new WebhookController()
