@@ -45,6 +45,6 @@ const authorizeUser = (req, res, next) => {
 router.get('/', authorizeUser, webhookController.getOwnWebhooks)
 router.post('/:event', authorizeUser, webhookController.register)
 // router.put('/:id', authorizeUser, webhookController.info)
-// router.delete('/:id', authorizeUser, webhookController.info)
+router.delete('/:id', authorizeUser, webhookController.deleteWebhook)
 
 router.use('*', (req, res, next) => next(createError(404)))

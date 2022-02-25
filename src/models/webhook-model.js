@@ -13,7 +13,6 @@ const schema = new mongoose.Schema({
     minLength: 1,
     maxLength: 1000,
     required: true,
-    unique: true,
     trim: true
   },
   eventType: {

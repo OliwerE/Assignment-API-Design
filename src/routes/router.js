@@ -16,6 +16,6 @@ export const router = express.Router()
 router.get('/', (req, res, next) => { res.json({ message: 'Hello World!' }) })
 router.use('/authenticate', authenticateRouter)
 router.use('/fish-reports', fishReportRouter)
-router.use('/webhook', webhookRouter)
+router.use('/webhooks', webhookRouter)
 
 router.use('*', (req, res, next) => next(createError(404)))

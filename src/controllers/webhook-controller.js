@@ -49,7 +49,7 @@ export class WebhookController {
   // ToDo list an users registered hooks
 
   /**
-   * Registers a new webhook
+   * Registers a new webhook.
    *
    * @param {object} req - Request object.
    * @param {object} res - Response object.
@@ -76,6 +76,35 @@ export class WebhookController {
         }
       } else {
         next(createError(400))
+      }
+    } catch (err) {
+      next(createError(500))
+    }
+  }
+
+  /**
+   * Deletes a webhook.
+   *
+   * @param {object} req - Request object.
+   * @param {object} res - Response object.
+   * @param {object} next - Next function.
+   */
+  async deleteWebhook (req, res, next) {
+    try {
+      const webhookID = req.params.id
+      const webhook = await Webhook.findOne({ _id: webhookID }).catch(() => {
+        next(createError(404))
+      })
+
+      if (webhook === null) {
+        next(createError(404))
+      } else if (webhook.user === req.user.username) {
+        await Webhook.deleteOne({ _id: webhookID })
+        res.status(200).json({ message: 'Webhook has been removed!' })
+      } else if (webhook.user !== req.user.username) {
+        next(createError(401))
+      } else {
+        next(createError(500))
       }
     } catch (err) {
       next(createError(500))
