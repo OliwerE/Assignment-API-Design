@@ -1,0 +1,123 @@
+(GET) /
+Startingpoint of the API. Provides hypermedia information.
+
+(GET) /authenticate
+Provides information how to login and register.
+
+(POST) /authenticate/login
+Used to login an user. username and password is required.
+{
+    "username": "exampleUser",
+    "password": "examplePassword"
+}
+
+(POST) /authenticate/register
+Used to register a user. username and password is required.
+{
+    "username": "exampleUser",
+    "password": "examplePassword"
+}
+
+(GET) /fish-reports
+Lists all fish reports (10 per page).
+
+(GET) /fish-reports?page=2
+Returns a specific page of fish reports (page 2 in this example).
+
+(GET) /fish-reports/:id
+List a specific fish report using the report id.
+
+(GET) /fish-reports/fisherman/:name
+Lists fish reports created by a specific fisherman.
+
+(GET) /fish-reports/fisherman/:name?page=2
+Lists a specific page of fish reports created by a specific fisherman.
+
+(GET) /fish-reports/lake/:name
+Lists fish reports created at a specific lake.
+
+(GET) /fish-reports/lake/:name?page=2
+Lists a specific page of fish reports created at a specific lake.
+
+(GET) /fish-reports/river/:name
+Lists fish reports created at a specific river.
+
+(GET) /fish-reports/river/:name?page=2
+Lists a specific page of fish reports created at a specific river.
+
+(GET) /fish-reports/city/:name
+Lists fish reports created at a specific city.
+
+(GET) /fish-reports/city/:name?page=2
+Lists a specific page of fish reports created at a specific city.
+
+(GET) /fish-reports/specie/:name
+Lists fish reports created at a specific fish specie.
+
+(GET) /fish-reports/specie/:name?page=2
+Lists a specific page of fish reports created at a specific fish specie.
+
+(GET) /fish-reports/weight/:name
+Lists fish reports created at a specific fish weight.
+
+(GET) /fish-reports/weight/:name?page=2
+Lists a specific page of fish reports created at a specific fish weight.
+
+(GET) /fish-reports/slength/:name
+Lists fish reports created at a specific fish length.
+
+(GET) /fish-reports/length/:name?page=2
+Lists a specific page of fish reports created at a specific fish length.
+
+(POST) /fish-reports
+Creates a new fish report
+{
+    "position": "56.659426150066025, 16.363167804004068",
+    "lakeRiverName": "Kalmarsund",
+    "city": "Kalmar",
+    "fishSpecie": "abborre",
+    "weight": "2.5",
+    "length": "50",
+    "imageURL": "https://www.domän.se/images/bild.jpg"
+}
+
+(PUT) /fish-reports/:id
+Updates a fish report
+{
+    "position": "56.659426150066025, 16.363167804004068",
+    "lakeRiverName": "Kalmarsund",
+    "city": "Kalmar",
+    "fishSpecie": "abborre",
+    "weight": "2.0",
+    "length": "30",
+    "imageURL": "https://www.domän.se/images/annanBild.jpg"
+}
+
+(DELETE) /fish-reports/:id
+Deletes a fish report
+
+(GET) /webhooks
+Returns all webhooks created by an user.
+
+(GET) /webhooks?page=2
+Returns the second page of all webhooks created by an user.
+
+(GET) /webhooks/:id
+Return a specific webhook created by the user.
+
+(POST) /webhooks/new-report
+Creates a new webhook. The webhook is triggered each time a new report is created.
+{
+    "hookURL": "https://api.domain.com/send-to",
+    "token": "aRandomToken"
+}
+
+(PUT) /webhooks/new-report/:id
+Updates a new report webhook.
+{
+    "hookURL": "https://api.domain.com/send-to",
+    "token": "changedToken"
+}
+
+(DELETE) /webhooks/new-report/:id
+Deletes a new report webhook.

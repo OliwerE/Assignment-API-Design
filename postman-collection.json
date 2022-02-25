@@ -1,0 +1,1508 @@
+{
+	"info": {
+		"_postman_id": "07cae560-0277-4805-972a-81e2c10cf143",
+		"name": "1dv027 API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Requests",
+			"item": [
+				{
+					"name": "/",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}",
+							"host": [
+								"{{base-url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/authenticate",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/authenticate",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/authenticate/login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"user1\",\r\n    \"password\": \"thisIsALongPassword\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/authenticate/login",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"authenticate",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/authenticate/register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"user1\",\r\n    \"password\": \"thisIsALongPassword\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/authenticate/register",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"authenticate",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/fish-reports",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/fish-reports",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"fish-reports"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/fish-reports?page=2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/fish-reports?page=2",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"fish-reports"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/fish-reports/:id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/fish-reports/6218fe68177bf532c8833a70",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"fish-reports",
+								"6218fe68177bf532c8833a70"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/fish-reports/fisherman/name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/fish-reports/fisherman/user1",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"fish-reports",
+								"fisherman",
+								"user1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/fish-reports/fisherman/name?page=2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/fish-reports/fisherman/user1?page=2",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"fish-reports",
+								"fisherman",
+								"user1"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/fish-reports/lake/name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/fish-reports/lake/kalmarsund",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"fish-reports",
+								"lake",
+								"kalmarsund"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/fish-reports/lake/name?page=2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/fish-reports/lake/kalmarsund?page=2",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"fish-reports",
+								"lake",
+								"kalmarsund"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/fish-reports/river/name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/fish-reports/river/kalmarsund",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"fish-reports",
+								"river",
+								"kalmarsund"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/fish-reports/river/name?page=2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/fish-reports/river/kalmarsund?page=2",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"fish-reports",
+								"river",
+								"kalmarsund"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/fish-reports/city/name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/fish-reports/city/kalmar",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"fish-reports",
+								"city",
+								"kalmar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/fish-reports/city/name?page=2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/fish-reports/city/kalmar?page=2",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"fish-reports",
+								"city",
+								"kalmar"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/fish-reports/specie/name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/fish-reports/specie/torsk",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"fish-reports",
+								"specie",
+								"torsk"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/fish-reports/specie/name?page=2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/fish-reports/specie/torsk?page=2",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"fish-reports",
+								"specie",
+								"torsk"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/fish-reports/weight/value",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/fish-reports/weight/2.0",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"fish-reports",
+								"weight",
+								"2.0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/fish-reports/weight/value?page=2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/fish-reports/weight/2.0?page=2",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"fish-reports",
+								"weight",
+								"2.0"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/fish-reports/length/value",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/fish-reports/length/40",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"fish-reports",
+								"length",
+								"40"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/fish-reports/length/value?page=2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/fish-reports/length/40?page=2",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"fish-reports",
+								"length",
+								"40"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/fish-reports",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{auth-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"position\": \"56.659426150066025, 16.363167804004068\",\r\n    \"lakeRiverName\": \"kalmarsund\",\r\n    \"city\": \"kalmar\",\r\n    \"fishSpecie\": \"aborre\",\r\n    \"weight\": \"2.0\",\r\n    \"length\": \"40\",\r\n    \"imageURL\": \"https://www.abc123/images/abc.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/fish-reports",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"fish-reports"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/fish-reports",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{auth-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"position\": \"56.659426150066025, 16.363167804004068\",\r\n    \"lakeRiverName\": \"kalmarsund\",\r\n    \"city\": \"kalmar\",\r\n    \"fishSpecie\": \"aborre\",\r\n    \"weight\": \"5.0\",\r\n    \"length\": \"50\",\r\n    \"imageURL\": \"https://www.abc123/images/annanBild.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/fish-reports/6218fe68177bf532c8833a70",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"fish-reports",
+								"6218fe68177bf532c8833a70"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/fish-reports",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{auth-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/fish-reports/6218fe68177bf532c8833a70",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"fish-reports",
+								"6218fe68177bf532c8833a70"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/webhooks",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{auth-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/webhooks",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"webhooks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/webhooks?page=2",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{auth-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/webhooks?page=2",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"webhooks"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/webhooks/webhook/id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{auth-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/webhooks/webhook/6218fafdcb142a07f84eca3b",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"webhooks",
+								"webhook",
+								"6218fafdcb142a07f84eca3b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/webhooks/event",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{auth-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hookURL\": \"https://api.domain.com/new-report\",\r\n    \"token\": \"hn0tgw34fe+231qrwfnhh4t80g3+ynh\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/webhooks/new-report",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"webhooks",
+								"new-report"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/webhooks/webhook/id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{auth-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hookURL\": \"https://api.domain2.com/new-report\",\r\n    \"token\": \"hn0tgw34fe+231qrwfnhh4t80g3+ynh\",\r\n    \"event\": \"new-report\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/webhooks/webhook/621910e3c62ad146048ed1bb",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"webhooks",
+								"webhook",
+								"621910e3c62ad146048ed1bb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/webhooks/webhook/id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{auth-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/webhooks/webhook/6218ecd68587bf235cb722ad",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"webhooks",
+								"webhook",
+								"6218ecd68587bf235cb722ad"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Bad Requests",
+			"item": [
+				{
+					"name": "test 404",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/does-not-exist",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"does-not-exist"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login without username and password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/authenticate/login",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"authenticate",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login without password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"user1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/authenticate/login",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"authenticate",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login without username",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"thisIsALongPassword\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/authenticate/login",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"authenticate",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register without username and password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/authenticate/register",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"authenticate",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register without password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"user987\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/authenticate/register",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"authenticate",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register without username",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"thisIsALongPassword\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/authenticate/register",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"authenticate",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get non existing fish report",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{auth-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/fish-reports/621910e3c62ad146048ed1bb",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"fish-reports",
+								"621910e3c62ad146048ed1bb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get non existing fish report page",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/fish-reports?page=9999999",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"fish-reports"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "9999999"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create fish report with missing key (position)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{auth-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"lakeRiverName\": \"kalmarsund\",\r\n    \"city\": \"kalmar\",\r\n    \"fishSpecie\": \"aborre\",\r\n    \"weight\": \"2.0\",\r\n    \"length\": \"40\",\r\n    \"imageURL\": \"https://www.abc123/images/abc.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/fish-reports",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"fish-reports"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create fish report with missing key (lakeRiverName)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{auth-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"position\": \"56.659426150066025, 16.363167804004068\",\r\n    \"city\": \"kalmar\",\r\n    \"fishSpecie\": \"aborre\",\r\n    \"weight\": \"2.0\",\r\n    \"length\": \"40\",\r\n    \"imageURL\": \"https://www.abc123/images/abc.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/fish-reports",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"fish-reports"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create fish report with missing key (city)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{auth-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"position\": \"56.659426150066025, 16.363167804004068\",\r\n    \"lakeRiverName\": \"kalmarsund\",\r\n    \"fishSpecie\": \"aborre\",\r\n    \"weight\": \"2.0\",\r\n    \"length\": \"40\",\r\n    \"imageURL\": \"https://www.abc123/images/abc.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/fish-reports",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"fish-reports"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create fish report with missing key (fishSpecie)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{auth-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"position\": \"56.659426150066025, 16.363167804004068\",\r\n    \"lakeRiverName\": \"kalmarsund\",\r\n    \"city\": \"kalmar\",\r\n    \"weight\": \"2.0\",\r\n    \"length\": \"40\",\r\n    \"imageURL\": \"https://www.abc123/images/abc.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/fish-reports",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"fish-reports"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create fish report with missing key (weight)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{auth-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"position\": \"56.659426150066025, 16.363167804004068\",\r\n    \"lakeRiverName\": \"kalmarsund\",\r\n    \"city\": \"kalmar\",\r\n    \"fishSpecie\": \"aborre\",\r\n    \"length\": \"40\",\r\n    \"imageURL\": \"https://www.abc123/images/abc.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/fish-reports",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"fish-reports"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create fish report with missing key (length)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{auth-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"position\": \"56.659426150066025, 16.363167804004068\",\r\n    \"lakeRiverName\": \"kalmarsund\",\r\n    \"city\": \"kalmar\",\r\n    \"fishSpecie\": \"aborre\",\r\n    \"weight\": \"2.0\",\r\n    \"imageURL\": \"https://www.abc123/images/abc.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/fish-reports",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"fish-reports"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create fish report with missing key (imageURL)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{auth-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"position\": \"56.659426150066025, 16.363167804004068\",\r\n    \"lakeRiverName\": \"kalmarsund\",\r\n    \"city\": \"kalmar\",\r\n    \"fishSpecie\": \"aborre\",\r\n    \"weight\": \"2.0\",\r\n    \"length\": \"40\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/fish-reports",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"fish-reports"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update non existing report",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{auth-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"position\": \"56.659426150066025, 16.363167804004068\",\r\n    \"lakeRiverName\": \"kalmarsund\",\r\n    \"city\": \"kalmar\",\r\n    \"specie\": \"aborre\",\r\n    \"weight\": \"2.0\",\r\n    \"length\": \"40\",\r\n    \"imageURL\": \"https://www.abc123/images/abc.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/fish-reports/6218fe68177bf532c8833a70",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"fish-reports",
+								"6218fe68177bf532c8833a70"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete non existing report",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{auth-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"position\": \"56.659426150066025, 16.363167804004068\",\r\n    \"lakeRiverName\": \"kalmarsund\",\r\n    \"city\": \"kalmar\",\r\n    \"specie\": \"aborre\",\r\n    \"weight\": \"2.0\",\r\n    \"length\": \"40\",\r\n    \"imageURL\": \"https://www.abc123/images/abc.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/fish-reports/6218fe68177bf532c8833a70",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"fish-reports",
+								"6218fe68177bf532c8833a70"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get non existing webhooks page",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{auth-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/webhooks?page=9999",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"webhooks"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "9999"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get non existing webhook",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{auth-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/webhooks/webhook/621910e3c62ad146048ed1bc",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"webhooks",
+								"webhook",
+								"621910e3c62ad146048ed1bc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New webhook missing hookURL",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{auth-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"token\": \"hn0tgw34fe+231qrwfnhh4t80g3+ynh\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/webhooks/new-report",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"webhooks",
+								"new-report"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New webhook missing token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{auth-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hookURL\": \"https://api.domain.com/new-report\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/webhooks/new-report",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"webhooks",
+								"new-report"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New webhook missing hookURL and token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{auth-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/webhooks/new-report",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"webhooks",
+								"new-report"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update non existing webhook",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{auth-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"token\": \"hn0tgw34fe+231qrwfnhh4t80g3+ynh\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/webhooks/6218fe68177bf532c8833a70",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"webhooks",
+								"6218fe68177bf532c8833a70"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete non existing webhook",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{auth-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"position\": \"56.659426150066025, 16.363167804004068\",\r\n    \"lakeRiverName\": \"kalmarsund\",\r\n    \"city\": \"kalmar\",\r\n    \"specie\": \"aborre\",\r\n    \"weight\": \"2.0\",\r\n    \"length\": \"40\",\r\n    \"imageURL\": \"https://www.abc123/images/abc.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/webhooks/6218fe68177bf532c8833a70",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"webhooks",
+								"6218fe68177bf532c8833a70"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.sendRequest({",
+					"    url: pm.variables.get(\"base-url\")+ '/authenticate/login',",
+					"    method: 'POST',",
+					"    header: {",
+					"        'content-type': 'application/json'",
+					"    },",
+					"    body: {",
+					"        mode: 'raw',",
+					"        raw: JSON.stringify({",
+					"            \"username\": \"user1\",",
+					"            \"password\": \"thisIsALongPassword\"",
+					"        })",
+					"    }",
+					"}, (err, res) => pm.collectionVariables.set(\"auth-token\", res.json().accessToken));"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base-url",
+			"value": "https://cscloud8-125.lnu.se",
+			"type": "string"
+		},
+		{
+			"key": "auth-token",
+			"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxIiwidXNlcklkIjoiNjIxMTFmYWQ2OTE0ODYyNjg4ZjUwNjFhIiwieF9wZXJtaXNzaW9uX2xldmVsIjoxLCJpYXQiOjE2NDU3OTY0NDYsImV4cCI6MTY0NTgzOTY0Nn0.WJWoIrGr_DNXvCBIYAAfI1JBaG6RwDSh5h76mqVPsbLKj9yhK1yta3RK3lXqSSanxKMTiIQaGUGdkeQJ_GcFzT6BqcljdGZKXdGhRwqB8KBssGzxvb3fxobL0hzS4HW7h5TGcrt4OBhPsqJLlJJdgq_ZDQXwc5jqziygzWuqNK6lqvrFWMMo_XiWhs9VUwURxRkG1YN8owkPCZS3hqJZeh60d1PhvyA2rC_G0BIjnNavSZNe_6wT8lNpK9fuzDNfJgPCN0i315zriiS-23vd86oFpVAh5BvhOjRuq8jBH2p9-xDOAqSDnDvf4U2gUu_lru3-xnExZ21tMnHVxysTVg",
+			"type": "string"
+		}
+	]
+}
