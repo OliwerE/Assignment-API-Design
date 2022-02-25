@@ -13,6 +13,34 @@ import { Webhook } from '../models/webhook-model.js'
  */
 export class WebhookController {
   /**
+   * Returns a specific webhook.
+   *
+   * @param {object} req - Request object.
+   * @param {object} res - Response object.
+   * @param {object} next - Next function.
+   */
+  async getWebhook (req, res, next) {
+    try {
+      const webhookID = req.params.id
+      const webhook = await Webhook.findOne({ _id: webhookID }).catch(() => {
+        next(createError(404))
+      })
+
+      if (webhook === null) {
+        next(createError(404))
+      } else if (webhook.user === req.user.username) {
+        res.json({ message: 'Found webhook.', webhook })
+      } else if (webhook.user !== req.user.username) {
+        next(createError(401))
+      } else {
+        next(createError(500))
+      }
+    } catch (err) {
+      next(createError(500))
+    }
+  }
+
+  /**
    * Returns a users own webhooks.
    *
    * @param {object} req - Request object.
@@ -55,7 +83,7 @@ export class WebhookController {
    * @param {object} res - Response object.
    * @param {object} next - Next function.
    */
-  async register (req, res, next) {
+  async registerWebhook (req, res, next) {
     try {
       const event = req.params.event
       const username = req.user.username
@@ -70,7 +98,7 @@ export class WebhookController {
             token: token
           })
           await newWebhook.save()
-          res.status(201).json({ message: 'Webhook has been created!' }) //ToDo Return webhook
+          res.status(201).json({ message: 'Webhook has been created!' }) //ToDo Return webhook (link)
         } else {
           next(createError(404))
         }
@@ -111,7 +139,50 @@ export class WebhookController {
     }
   }
 
-  // unregister (req, res, next) {
-    
-  // }
+  /**
+   * Updates a webhook content.
+   *
+   * @param {object} req - Request object.
+   * @param {object} res - Response object.
+   * @param {object} next - Next function.
+   */
+  async updateWebhook (req, res, next) {
+    try {
+      const webhookID = req.params.id
+      const webhook = await Webhook.findOne({ _id: webhookID }).catch(() => {
+        next(createError(404))
+      })
+
+      if (webhook === null) {
+        next(createError(404))
+      } else if (webhook.user === req.user.username) {
+        const username = req.user.username
+        const { hookURL, token, event } = req.body
+
+        if (event !== undefined && event !== '' && username !== undefined && hookURL !== undefined && hookURL !== '' && token !== undefined && token !== '') {
+          await Webhook.updateOne({ _id: webhookID }, { user: username, eventType: event, hookURL, token }, (error, response) => {
+            if (error) {
+              next(createError(500))
+            }
+
+            if (response) {
+              if (response.n === 0) { // not updated
+                next(createError(500))
+              } else if (response.n === 1) {
+                res.status(200).json({ message: 'Webhook has been updated' }) // add link to resource!!!
+              } else {
+                next(createError(500))
+              }
+            }
+          })
+        } else {
+          next(createError(400))
+        }
+      } else {
+        next(createError(401))
+      }
+    } catch (err) {
+      next(createError(500))
+    }
+  }
 }
