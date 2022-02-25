@@ -32,6 +32,10 @@ async function startServer () {
 
   // Request errors
   app.use((err, req, res, next) => {
+    if (err.status === 400) {
+      return res.status(400).json({ message: 'Bad Request', status: '401' })
+    }
+
     if (err.status === 401) {
       return res.status(401).json({ message: 'Unauthorized', status: '401' })
     }
