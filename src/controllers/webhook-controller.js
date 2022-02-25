@@ -19,9 +19,29 @@ export class WebhookController {
    * @param {object} res - Response object.
    * @param {object} next - Next function.
    */
-  info (req, res, next) {
+  async getOwnWebhooks (req, res, next) {
     try {
-      res.json({ message: 'Webhook controller, ToDo: add info' })
+      const numOfHooks = 10
+      const page = parseInt(req.query.page || 1)
+
+      const query = { user: req.user.username }
+
+      const ownWebhooks = (await Webhook.find(query).sort({ createdAt: -1 }).limit(numOfHooks).skip(numOfHooks * (page - 1))).map(R => ({
+        id: R._id,
+        user: R.user,
+        eventType: R.eventType,
+        hookURL: R.hookURL,
+        token: R.token,
+        createdAt: R.createdAt,
+        updatedAt: R.updatedAt
+      }))
+
+      if (ownWebhooks.length <= 0) {
+        next(createError(404))
+      } else {
+        const numOfPages = Math.ceil((await Webhook.countDocuments(query)) / numOfHooks)
+        res.json({ message: 'Your webhooks.', page, numOfPages, ownWebhooks })
+      }
     } catch (err) {
       next(createError(500))
     }

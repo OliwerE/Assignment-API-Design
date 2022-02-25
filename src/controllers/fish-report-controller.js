@@ -61,7 +61,7 @@ export class FishReportController {
       if (reports.length <= 0) {
         next(createError(404))
       } else {
-        const numOfPages = Math.ceil((await FishReport.countDocuments({})) / numOfReports)
+        const numOfPages = Math.ceil((await FishReport.countDocuments(query)) / numOfReports)
         res.json({ message: 'fish reports!!!', page, numOfPages, reports })
       }
     } catch (err) {
