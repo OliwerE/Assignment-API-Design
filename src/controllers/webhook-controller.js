@@ -30,7 +30,20 @@ export class WebhookController {
       if (webhook === null) {
         next(createError(404))
       } else if (webhook.user === req.user.username) {
-        res.json({ message: 'Found webhook.', webhook })
+        res.json({
+          message: 'Found webhook.',
+          webhook,
+          links: {
+            self: {
+              href: (req.get('host') + req.originalUrl),
+              requestTypes: ['GET', 'PUT', 'DELETE']
+            },
+            parent: {
+              href: (req.get('host') + '/webhooks'),
+              requestTypes: ['GET']
+            }
+          }
+        })
       } else if (webhook.user !== req.user.username) {
         next(createError(401))
       } else {
@@ -68,14 +81,31 @@ export class WebhookController {
         next(createError(404))
       } else {
         const numOfPages = Math.ceil((await Webhook.countDocuments(query)) / numOfHooks)
-        res.json({ message: 'Your webhooks.', page, numOfPages, ownWebhooks })
+        res.json({
+          message: 'Your webhooks.',
+          page,
+          numOfPages,
+          ownWebhooks,
+          links: {
+            self: {
+              href: (req.get('host') + req.originalUrl),
+              requestTypes: ['POST']
+            },
+            parent: {
+              href: req.get('host'),
+              requestTypes: ['GET']
+            },
+            webhook: {
+              href: (req.get('host') + req.originalUrl + '/webhook/:id'),
+              requestTypes: ['GET', 'PUT', 'DELETE']
+            }
+          }
+        })
       }
     } catch (err) {
       next(createError(500))
     }
   }
-
-  // ToDo list an users registered hooks
 
   /**
    * Registers a new webhook.
@@ -92,14 +122,36 @@ export class WebhookController {
 
       if (event !== undefined && event !== '' && username !== undefined && hookURL !== undefined && hookURL !== '' && token !== undefined && token !== '') {
         if (event === 'new-report') {
-          const newWebhook = new Webhook({
+          const webhookData = {
             user: username,
             eventType: event,
             hookURL: hookURL,
             token: token
-          })
+          }
+          const newWebhook = new Webhook(webhookData)
           await newWebhook.save()
-          res.status(201).json({ message: 'Webhook has been created!' }) //ToDo Return webhook (link)
+
+          const reportID = await Webhook.findOne(webhookData).catch(() => {
+            next(createError(404))
+          })
+
+          res.status(201).json({
+            message: 'Webhook has been created!',
+            links: {
+              self: {
+                href: (req.get('host') + req.originalUrl),
+                requestTypes: ['POST']
+              },
+              parent: {
+                href: (req.get('host') + '/webhooks'),
+                requestTypes: ['GET']
+              },
+              createdResource: {
+                href: (req.get('host') + '/webhooks/webhook/' + reportID._id),
+                requestTypes: ['GET', 'DELETE', 'PUT']
+              }
+            }
+          })
         } else {
           next(createError(404))
         }
@@ -141,7 +193,23 @@ export class WebhookController {
               if (response.n === 0) { // not updated
                 next(createError(500))
               } else if (response.n === 1) {
-                res.status(200).json({ message: 'Webhook has been updated' }) // add link to resource!!!
+                res.status(200).json({
+                  message: 'Webhook has been updated',
+                  links: {
+                    self: {
+                      href: (req.get('host') + req.originalUrl),
+                      requestTypes: ['GET', 'PUT', 'DELETE']
+                    },
+                    parent: {
+                      href: (req.get('host') + '/webhooks'),
+                      requestTypes: ['GET']
+                    },
+                    updatedResource: {
+                      href: (req.get('host') + '/webhooks/webhook/' + webhookID),
+                      requestTypes: ['GET', 'DELETE', 'PUT']
+                    }
+                  }
+                })
               } else {
                 next(createError(500))
               }
@@ -176,7 +244,19 @@ export class WebhookController {
         next(createError(404))
       } else if (webhook.user === req.user.username) {
         await Webhook.deleteOne({ _id: webhookID })
-        res.status(200).json({ message: 'Webhook has been removed!' })
+        res.status(200).json({
+          message: 'Webhook has been removed!',
+          links: {
+            self: {
+              href: (req.get('host') + req.originalUrl),
+              requestTypes: ['GET', 'PUT', 'DELETE']
+            },
+            parent: {
+              href: (req.get('host') + '/webhooks'),
+              requestTypes: ['GET']
+            }
+          }
+        })
       } else if (webhook.user !== req.user.username) {
         next(createError(401))
       } else {

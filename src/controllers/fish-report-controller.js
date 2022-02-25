@@ -16,6 +16,79 @@ export class FishReportController {
   #webhookControler = new WebhookController()
 
   /**
+   * Returns fish report by id.
+   *
+   * @param {object} req - Request object.
+   * @param {object} res - Response object.
+   * @param {object} next - Next function.
+   */
+  async getFishReportByID (req, res, next) {
+    try {
+      const reportID = req.params.id
+      const report = await FishReport.findOne({ _id: reportID }).catch(() => {
+        next(createError(404))
+      })
+
+      if (report === null) {
+        next(createError(404))
+      } else {
+        res.json({
+          message: ('Fish report with id: ' + reportID),
+          fishReport: report,
+          links: {
+            self: {
+              href: (req.get('host') + req.originalUrl),
+              requestTypes: ['GET', 'POST']
+            },
+            parent: {
+              href: req.originalUrl === '/fish-reports' ? req.get('host') : (req.get('host') + '/fish-reports'),
+              requestTypes: ['GET']
+            },
+            getReportsByFisherman: {
+              href: (req.get('host') + '/fish-reports/fisherman/:name'),
+              requestTypes: ['GET']
+            },
+            getReportsByLake: {
+              href: (req.get('host') + '/fish-reports/lake/:name'),
+              requestTypes: ['GET']
+            },
+            getReportsByRiver: {
+              href: (req.get('host') + '/fish-reports/river/:name'),
+              requestTypes: ['GET']
+            },
+            getReportsByCity: {
+              href: (req.get('host') + '/fish-reports/city/:name'),
+              requestTypes: ['GET']
+            },
+            getReportsBySpecie: {
+              href: (req.get('host') + '/fish-reports/specie/:name'),
+              requestTypes: ['GET']
+            },
+            getReportsByWeight: {
+              href: (req.get('host') + '/fish-reports/weight/:value'),
+              requestTypes: ['GET']
+            },
+            getReportsByLenght: {
+              href: (req.get('host') + '/fish-reports/length/:value'),
+              requestTypes: ['GET']
+            },
+            editReport: {
+              href: (req.get('host') + '/fish-reports/:id'),
+              requestTypes: ['PUT', 'DELETE']
+            },
+            authenticate: {
+              href: (req.get('host') + '/authenticate'),
+              requestTypes: ['GET']
+            }
+          }
+        })
+      }
+    } catch (err) {
+      next(createError(500))
+    }
+  }
+
+  /**
    * Returns all fish reports.
    *
    * @param {object} req - Request object.
@@ -65,10 +138,60 @@ export class FishReportController {
         next(createError(404))
       } else {
         const numOfPages = Math.ceil((await FishReport.countDocuments(query)) / numOfReports)
-        res.json({ message: 'fish reports!!!', page, numOfPages, reports })
+        res.json({
+          message: 'Fishing reports',
+          page,
+          numOfPages,
+          reports,
+          links: {
+            self: {
+              href: (req.get('host') + req.originalUrl),
+              requestTypes: ['GET', 'POST']
+            },
+            parent: {
+              href: req.originalUrl === '/fish-reports' ? req.get('host') : (req.get('host') + '/fish-reports'),
+              requestTypes: ['GET']
+            },
+            getReportsByFisherman: {
+              href: (req.get('host') + '/fish-reports/fisherman/:name'),
+              requestTypes: ['GET']
+            },
+            getReportsByLake: {
+              href: (req.get('host') + '/fish-reports/lake/:name'),
+              requestTypes: ['GET']
+            },
+            getReportsByRiver: {
+              href: (req.get('host') + '/fish-reports/river/:name'),
+              requestTypes: ['GET']
+            },
+            getReportsByCity: {
+              href: (req.get('host') + '/fish-reports/city/:name'),
+              requestTypes: ['GET']
+            },
+            getReportsBySpecie: {
+              href: (req.get('host') + '/fish-reports/specie/:name'),
+              requestTypes: ['GET']
+            },
+            getReportsByWeight: {
+              href: (req.get('host') + '/fish-reports/weight/:value'),
+              requestTypes: ['GET']
+            },
+            getReportsByLenght: {
+              href: (req.get('host') + '/fish-reports/length/:value'),
+              requestTypes: ['GET']
+            },
+            editReport: {
+              href: (req.get('host') + '/fish-reports/:id'),
+              requestTypes: ['PUT', 'DELETE']
+            },
+            authenticate: {
+              href: (req.get('host') + '/authenticate'),
+              requestTypes: ['GET']
+            }
+          }
+        })
       }
     } catch (err) {
-      console.log(err)
       next(createError(500))
     }
   }
@@ -99,12 +222,30 @@ export class FishReportController {
 
       const newFishReport = new FishReport(reportData)
       await newFishReport.save()
-      res.status(201).json({ message: 'Fish report has been created!' }) // add link to report!!!
 
-      // Send webhook event
       const report = await FishReport.findOne(reportData).catch(() => {
         next(createError(404))
       })
+
+      res.status(201).json({
+        message: 'Fish report has been created!',
+        links: {
+          self: {
+            href: (req.get('host') + req.originalUrl),
+            requestTypes: ['POST']
+          },
+          parent: {
+            href: (req.get('host') + '/fish-reports'),
+            requestTypes: ['GET']
+          },
+          createdResource: {
+            href: (req.get('host') + '/fish-reports/' + report._id),
+            requestTypes: ['GET', 'PUT', 'DELETE']
+          }
+        }
+      })
+
+      // Send webhook event
       this.#webhookControler.sendWebhookEvent('new-report', report)
     } catch (err) {
       next(createError(500))
@@ -176,7 +317,23 @@ export class FishReportController {
             if (response.n === 0) { // not updated
               next(createError(500))
             } else if (response.n === 1) {
-              res.status(200).json({ message: 'Listing has been updated' }) // add link to resource!!!
+              res.status(200).json({
+                message: 'Listing has been updated.',
+                links: {
+                  self: {
+                    href: (req.get('host') + req.originalUrl),
+                    requestTypes: ['GET', 'PUT', 'DELETE']
+                  },
+                  parent: {
+                    href: (req.get('host') + '/fish-reports'),
+                    requestTypes: ['GET']
+                  },
+                  updatedResource: {
+                    href: (req.get('host') + '/fish-reports/' + report._id),
+                    requestTypes: ['GET', 'PUT', 'DELETE']
+                  }
+                }
+              })
             } else {
               next(createError(500))
             }
@@ -210,7 +367,19 @@ export class FishReportController {
         next(createError(404))
       } else if (report.fisherman === req.user.username) {
         await FishReport.deleteOne({ _id: reportID })
-        res.status(200).json({ message: 'Report has been removed!' })
+        res.status(200).json({
+          message: 'Report has been removed!',
+          links: {
+            self: {
+              href: (req.get('host') + req.originalUrl),
+              requestTypes: ['GET', 'PUT', 'DELETE']
+            },
+            parent: {
+              href: (req.get('host') + '/fish-reports'),
+              requestTypes: ['GET']
+            }
+          }
+        })
       } else if (report.fisherman !== req.user.username) {
         next(createError(401))
       } else {

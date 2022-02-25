@@ -13,7 +13,29 @@ import { router as webhookRouter } from './webhook-router.js'
 
 export const router = express.Router()
 
-router.get('/', (req, res, next) => { res.json({ message: 'Hello World!' }) })
+router.get('/', (req, res, next) => {
+  res.json({
+    message: 'Welcome to the LNU Fishing Club report API!',
+    links: {
+      self: {
+        href: req.get('host'),
+        requestTypes: ['GET']
+      },
+      authenticate: {
+        href: (req.get('host') + '/authenticate'),
+        requestTypes: ['GET']
+      },
+      fishReports: {
+        href: (req.get('host') + '/fish-reports'),
+        requestTypes: ['GET']
+      },
+      webhooks: {
+        href: (req.get('host') + '/webhooks'),
+        requestTypes: ['GET']
+      }
+    }
+  })
+})
 router.use('/authenticate', authenticateRouter)
 router.use('/fish-reports', fishReportRouter)
 router.use('/webhooks', webhookRouter)

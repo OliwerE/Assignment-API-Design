@@ -24,11 +24,27 @@ export class AuthenticateController {
    */
   info (req, res, next) {
     try {
-      /*
-        ToDo: hateoas for auth!
-      */
-
-      res.json({ message: 'Hello from authenticate controller!' })
+      res.json({
+        message: 'Login',
+        links: {
+          self: {
+            href: (req.get('host') + req.originalUrl),
+            requestTypes: ['GET']
+          },
+          parent: {
+            href: req.get('host'),
+            requestTypes: ['GET']
+          },
+          login: {
+            href: (req.get('host') + '/login'),
+            requestTypes: ['POST']
+          },
+          register: {
+            href: (req.get('host') + '/register'),
+            requestTypes: ['POST']
+          }
+        }
+      })
     } catch (err) {
       next(createError(500))
     }
@@ -66,7 +82,28 @@ export class AuthenticateController {
             expiresIn: process.env.ACCESS_TOKEN_LIFE
           })
 
-          res.json({ message: 'Login successful!', accessToken: token })
+          res.json({
+            message: 'Login successful!',
+            accessToken: token,
+            links: {
+              self: {
+                href: (req.get('host') + req.originalUrl),
+                requestTypes: ['POST']
+              },
+              parent: {
+                href: (req.get('host') + '/authenticate'),
+                requestTypes: ['GET']
+              },
+              webhooks: {
+                href: (req.get('host') + '/webhooks'),
+                requestTypes: ['GET']
+              },
+              fishReports: {
+                href: (req.get('host') + '/fish-reports'),
+                requestTypes: ['GET']
+              }
+            }
+          })
         } else {
           res.status(401).json({ message: 'Invalid credentials!' })
         }
@@ -120,7 +157,23 @@ export class AuthenticateController {
           password: await bcrypt.hash(password, 8)
         })
         await newUser.save()
-        res.status(201).json({ message: 'User has been created!' })
+        res.status(201).json({
+          message: 'User has been created!',
+          links: {
+            self: {
+              href: (req.get('host') + req.originalUrl),
+              requestTypes: ['POST']
+            },
+            parent: {
+              href: (req.get('host') + '/authenticate'),
+              requestTypes: ['GET']
+            },
+            login: {
+              href: (req.get('host') + '/authenticate/login'),
+              requestTypes: ['POST']
+            }
+          }
+        })
       } else if (numOfUsernameInDB.length > 0) {
         res.status(409).json({ message: 'Username does already exist! Please choose another or login.' })
       } else {

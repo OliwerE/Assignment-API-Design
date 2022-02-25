@@ -43,6 +43,7 @@ const authorizeUser = (req, res, next) => {
 }
 
 router.get('/', fishController.getFishReports)
+router.get('/:id', fishController.getFishReportByID)
 router.get('/:category/:categoryValue', fishController.getFishReports)
 router.post('/', authorizeUser, (req, res, next) => fishController.createFishReport(req, res, next))
 router.put('/:id', authorizeUser, (req, res, next) => fishController.updateFishReport(req, res, next))
