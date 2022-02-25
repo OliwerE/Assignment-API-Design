@@ -333,14 +333,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base-url}}/fish-reports/specie/torsk",
+							"raw": "{{base-url}}/fish-reports/specie/röding",
 							"host": [
 								"{{base-url}}"
 							],
 							"path": [
 								"fish-reports",
 								"specie",
-								"torsk"
+								"röding"
 							]
 						}
 					},
@@ -352,14 +352,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base-url}}/fish-reports/specie/torsk?page=2",
+							"raw": "{{base-url}}/fish-reports/specie/röding?page=2",
 							"host": [
 								"{{base-url}}"
 							],
 							"path": [
 								"fish-reports",
 								"specie",
-								"torsk"
+								"röding"
 							],
 							"query": [
 								{
