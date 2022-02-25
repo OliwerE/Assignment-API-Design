@@ -7,11 +7,14 @@
 
 import createError from 'http-errors'
 import { FishReport } from '../models/fish-report-model.js'
+import { WebhookController } from '../controllers/webhook-controller.js'
 
 /**
  * Class represents the course controller.
  */
 export class FishReportController {
+  webhookControler = new WebhookController()
+
   /**
    * Returns all fish reports.
    *
@@ -83,7 +86,7 @@ export class FishReportController {
 
       const { position, lakeRiverName, city, fishSpecie, weight, length, imageURL } = req.body
 
-      const newFishReport = new FishReport({
+      const reportData = {
         fisherman: req.user.username,
         position,
         lakeRiverName,
@@ -92,9 +95,17 @@ export class FishReportController {
         weight,
         length,
         imageURL
-      })
+      }
+
+      const newFishReport = new FishReport(reportData)
       await newFishReport.save()
       res.status(201).json({ message: 'Fish report has been created!' }) // add link to report!!!
+
+      // Send webhook event
+      const report = await FishReport.findOne(reportData).catch(() => {
+        next(createError(404))
+      })
+      this.webhookControler.sendWebhookEvent('new-report', report)
     } catch (err) {
       next(createError(500))
     }

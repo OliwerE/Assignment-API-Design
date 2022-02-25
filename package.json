@@ -24,7 +24,8 @@
     "helmet": "^4.4.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.13",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "node-fetch": "^3.2.0"
   },
   "devDependencies": {
     "@lnu/eslint-config": "^1.1.2",

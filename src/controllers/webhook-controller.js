@@ -6,6 +6,7 @@
  */
 
 import createError from 'http-errors'
+import fetch from 'node-fetch'
 import { Webhook } from '../models/webhook-model.js'
 
 /**
@@ -111,35 +112,6 @@ export class WebhookController {
   }
 
   /**
-   * Deletes a webhook.
-   *
-   * @param {object} req - Request object.
-   * @param {object} res - Response object.
-   * @param {object} next - Next function.
-   */
-  async deleteWebhook (req, res, next) {
-    try {
-      const webhookID = req.params.id
-      const webhook = await Webhook.findOne({ _id: webhookID }).catch(() => {
-        next(createError(404))
-      })
-
-      if (webhook === null) {
-        next(createError(404))
-      } else if (webhook.user === req.user.username) {
-        await Webhook.deleteOne({ _id: webhookID })
-        res.status(200).json({ message: 'Webhook has been removed!' })
-      } else if (webhook.user !== req.user.username) {
-        next(createError(401))
-      } else {
-        next(createError(500))
-      }
-    } catch (err) {
-      next(createError(500))
-    }
-  }
-
-  /**
    * Updates a webhook content.
    *
    * @param {object} req - Request object.
@@ -184,5 +156,62 @@ export class WebhookController {
     } catch (err) {
       next(createError(500))
     }
+  }
+
+  /**
+   * Deletes a webhook.
+   *
+   * @param {object} req - Request object.
+   * @param {object} res - Response object.
+   * @param {object} next - Next function.
+   */
+  async deleteWebhook (req, res, next) {
+    try {
+      const webhookID = req.params.id
+      const webhook = await Webhook.findOne({ _id: webhookID }).catch(() => {
+        next(createError(404))
+      })
+
+      if (webhook === null) {
+        next(createError(404))
+      } else if (webhook.user === req.user.username) {
+        await Webhook.deleteOne({ _id: webhookID })
+        res.status(200).json({ message: 'Webhook has been removed!' })
+      } else if (webhook.user !== req.user.username) {
+        next(createError(401))
+      } else {
+        next(createError(500))
+      }
+    } catch (err) {
+      next(createError(500))
+    }
+  }
+
+  /**
+   * Sends an event to all registered webhooks.
+   *
+   * @param {string} eventType - Type of event triggered.
+   * @param {object} report - Fish report.
+   */
+  async sendWebhookEvent (eventType, report) {
+    // Get webhooks
+    const registeredWebhooks = (await Webhook.find({ eventType })).map(R => ({
+      hookURL: R.hookURL,
+      token: R.token
+    }))
+
+    // Send fish report to webhooks
+    registeredWebhooks.forEach((hook) => {
+      fetch(hook.hookURL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: hook.token
+        },
+        body: JSON.stringify(report)
+      }).catch(err => {
+        console.error(err)
+      })
+    })
   }
 }
